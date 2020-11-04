@@ -47,9 +47,9 @@ public class SuperArray{
     return old_val;
   }
 
-//g
+//g RESIZE
   private void resize(){
-    String[] bigger = new String[data.length+10];
+    String[] bigger = new String[data.length*2];
     for (int i=0; i<data.length; i++){
       bigger[i]=data[i];
     }
