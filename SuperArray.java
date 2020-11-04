@@ -56,6 +56,40 @@ public class SuperArray{
     data = bigger;
   }
 
+//11.4.20
+  public boolean isEmpty(){
+    return size==0;
+  }
+
+  public void clear(){
+    size=0;
+    for (int i=0; i<size; i++){
+      data[i]=null;
+    }
+  }
+
+//to String
+  public String toString(){
+    String string = "[";
+    for (int i=0; i<size-1; i++){
+      string+=data[i]+", ";
+    }
+    string+=data[size]+"]";
+    return string;
+  }
+
+//Returns true if this list contains the specified element
+  public boolean contains(String s){
+    boolean contains=false;
+    for (int i=0; i < size; i++){
+      if (data[i].equals(s)){
+        contains=true;
+      }
+    }
+    return contains;
+  }
+
+
   public static void main(String[] args){
   }
 }
