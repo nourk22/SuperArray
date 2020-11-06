@@ -3,17 +3,39 @@ public class SuperArray{
   private int size; //current size
 
 // constructors
+
+// from ASSIGNMENT 14
   public SuperArray(){
     String[] data = new String[10];
   }
 
-//methods
-//c
+// from ASSIGNMENT 15
+//CREATE SUPERARRAY WITH GIVEN STARTING CAPACITY
+    public SuperArray(int initialCapacity){
+      String[] data = new String[initialCapacity];
+    }
+
+// methods
+
+//RETURN SIZE
   public int size(){
     return size;
   }
 
-//d
+//RETURN ELEMENT AT GIVEN INDEX
+  public String get(int index){
+    return data[index];
+  }
+
+
+//CHANGE ELEMENT AT GIVEN INDEX
+  public String set(int index, String element){
+    String old_val=data[index];
+    data[index]=element;
+    return old_val;
+  }
+
+//ADD ELEMENTS TO STRING
   public boolean add(String element){
     if (size<data.length){
       data[size]=element;
@@ -34,20 +56,7 @@ public class SuperArray{
     return false;
   }
 
-
-//e
-  public String get(int index){
-    return data[index];
-  }
-
-//f
-  public String set(int index, String element){
-    String old_val=data[index];
-    data[index]=element;
-    return old_val;
-  }
-
-//g RESIZE
+//RESIZE
   private void resize(){
     String[] bigger = new String[data.length*2];
     for (int i=0; i<data.length; i++){
@@ -56,11 +65,9 @@ public class SuperArray{
     data = bigger;
   }
 
-//11.4.20
-  public boolean isEmpty(){
-    return size==0;
-  }
+// from ASSIGNMENT 15
 
+//CLEARS LIST
   public void clear(){
     size=0;
     for (int i=0; i<size; i++){
@@ -68,7 +75,13 @@ public class SuperArray{
     }
   }
 
-//to String
+//RETURNS TRUE IF LIST IS EMPTY
+  public boolean isEmpty(){
+    return size==0;
+  }
+
+
+//TO STRING
   public String toString(){
     String string = "[";
     for (int i=0; i<size-1; i++){
@@ -78,16 +91,16 @@ public class SuperArray{
     return string;
   }
 
-//Returns true if this list contains the specified element
+//RETURNS TRUE IF LIST CONTAINS GIVEN ELEMENT
   public boolean contains(String s){
-    boolean contains=false;
     for (int i=0; i < size; i++){
       if (data[i].equals(s)){
-        contains=true;
+        return true;
       }
     }
-    return contains;
+    return false;
   }
+
 
 
   public static void main(String[] args){
