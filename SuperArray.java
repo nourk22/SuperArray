@@ -101,7 +101,45 @@ public class SuperArray{
     return false;
   }
 
+//INSERTS ELEMENT AT SPECIFIED POS; SHIFTS EVERYTHING RIGHT IF NEEDED
+  public void add(int index, String element){
+    if (index+1>=data.length){
+      //Problem: program  might crash if the size is still > than the resize
+      //how to fix?
+      //while loop that repeats until size is < length of array
+      while (index>=data.length){
+        resize();
+      }
+    }
 
+    if (index<data.length){
+      //if shift not necessary
+      if (data[index]==null){
+        data[index]=element;
+      }
+      //shift
+      for (int i=(data.length-1); i>=index && i<(data.length-index); i=i-1){
+        data[i]=data[i-1];
+        if (i==index){
+          data[i]=element; //add element after shift is complete
+        }
+      }
+      size++; //increase size
+    }else{
+      //this shouldn't happen
+      System.out.println(";-;");
+    }
+  }
+
+//REMOVES ELEMENT AT SPECIFIED POS; SHIFTS EVERYTHING LEFT IF NEEDED
+  public String remove(int index){
+    String elementRemoved=data[index];
+    for (int i=index; i<(data.length); i++){
+        data[i]=data[i+1]; //shift left (no need for removal, shifting removes it automatically)
+    }
+    size=size-1; //decrease size
+    return elementRemoved;
+  }
 
   public static void main(String[] args){
   }
