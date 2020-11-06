@@ -141,6 +141,34 @@ public class SuperArray{
     return elementRemoved;
   }
 
+//RETURNS INDEX OF FIRST OCCURRENCE OF ELEMENT OR -1 IF IT'S NOT THERE
+  public int indexOf(String s){
+    for (int i=0; i<size; i++){
+      if (data[i].equals(s)){
+        return i;
+      }
+    }
+    return (-1);
+  }
+
+/* Returns an array containing all of the elements
+  in this list in proper sequence (from first to last element).
+	The returned array will be "safe" in that
+  no references to it are maintained by this list.
+  (In other words, this method must allocate a new array).
+*/
+
+//not fully sure about this one (regarding memory things)
+  public String[] toArray(){
+    String[] safe = new String[data.length];
+    String placeholder="";
+    for (int i=0; i<data.length; i++){
+      placeholder=data[i];
+      safe[i]=placeholder;
+    }
+    return safe;
+  }
+
   public static void main(String[] args){
   }
 }
