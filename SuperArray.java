@@ -11,9 +11,9 @@ public class SuperArray{
 
 // from ASSIGNMENT 15
 //CREATE SUPERARRAY WITH GIVEN STARTING CAPACITY
-    public SuperArray(int initialCapacity){
-      String[] data = new String[initialCapacity];
-    }
+  public SuperArray(int initialCapacity){
+    String[] data = new String[initialCapacity];
+  }
 
 // methods
 
@@ -84,10 +84,10 @@ public class SuperArray{
 //TO STRING
   public String toString(){
     String string = "[";
-    for (int i=0; i<size-1; i++){
+    for (int i=0; i<size-2; i++){
       string+=data[i]+", ";
     }
-    string+=data[size]+"]";
+    string+=data[size-1]+"]";
     return string;
   }
 
