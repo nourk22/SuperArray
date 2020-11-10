@@ -14,7 +14,7 @@ public class SuperArray{
 
 // 15. constructor
   public SuperArray(int initialCapacity){ // create superarray with given starting capacity
-    String[] data = new String[initialCapacity];
+    data = new String[initialCapacity];
     size = 0;
     capacity = initialCapacity;
   }
@@ -143,7 +143,6 @@ public class SuperArray{
   (In other words, this method must allocate a new array).
 */
 
-// not fully sure about this one (regarding memory things)
   public String[] toArray(){
     String[] safe = new String[size];
     for (int i=0; i<size; i++){
@@ -151,6 +150,34 @@ public class SuperArray{
     }
     return safe;
   }
+
+//
+//
+// assignment 16
+
+// 16. (c) last index of
+  public int lastIndexOf(String value){
+    for (int i=size-1; i>=0; i--){
+      if (data[i].equals(value)){
+        return i;
+      }
+    }
+    return (-1);
+  }
+
+// 16. (d) Checks to see if two superarrays are equal
+  public boolean equals(SuperArray other){
+    if (size != other.size()){
+      return false;
+    }
+    for (int i=0; i<size(); i++){
+      if (! data[i].equals(other.get(i))){
+        return false;
+      }
+    }
+    return true;
+  }
+
 
   public static void main(String[] args){
   }
