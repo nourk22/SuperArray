@@ -1,73 +1,72 @@
 public class SuperArray{
+
+// 14.(a) instance variables
   private String[] data;
   private int size; //current size
+  private int capacity;
 
-// constructors
-
-// from ASSIGNMENT 14
+// 14. (b) constructor
   public SuperArray(){
-    String[] data = new String[10];
+    data = new String[10];
+    size = 0;
+    capacity = 10;
   }
 
-// from ASSIGNMENT 15
-//CREATE SUPERARRAY WITH GIVEN STARTING CAPACITY
-  public SuperArray(int initialCapacity){
+// 15. constructor
+  public SuperArray(int initialCapacity){ // create superarray with given starting capacity
     String[] data = new String[initialCapacity];
+    size = 0;
+    capacity = initialCapacity;
   }
 
-// methods
+// assignment 14 methods
 
-//RETURN SIZE
+// 14. (c) size method: return size
   public int size(){
     return size;
   }
 
-//RETURN ELEMENT AT GIVEN INDEX
+// 14. capacity method: not required but here for testing purposes
+  public int capacity(){
+    return capacity;
+  }
+// 14. (d) add method: add elements to end of array - modified
+  public boolean add(String element){
+    if (size>=capacity){
+      resize();
+    }
+    data[size]=element;
+    size++;
+    return true;
+  }
+
+// 14. (e) get method: get element at index
   public String get(int index){
     return data[index];
   }
 
-
-//CHANGE ELEMENT AT GIVEN INDEX
+// 14. (f) set method: change element at index
   public String set(int index, String element){
     String old_val=data[index];
     data[index]=element;
     return old_val;
   }
 
-//ADD ELEMENTS TO STRING
-  public boolean add(String element){
-    if (size<data.length){
-      data[size]=element;
-      size++;
-      return true;
-    }else if (size>=data.length){
-      //Problem: program  might crash if the size is still > than the resize
-      //how to fix?
-      //while loop that repeats until size is < length of array
-      while (size>=data.length){
-        resize();
-      }
-      data[size]=element;
-      size++;
-      return true;
-    }
-    //this shouldn't happen
-    return false;
-  }
-
-//RESIZE
+// 14. (g) resize method
   private void resize(){
-    String[] bigger = new String[data.length*2];
-    for (int i=0; i<data.length; i++){
+    String[] bigger = new String[capacity*2];
+    for (int i=0; i<size; i++){
       bigger[i]=data[i];
     }
     data = bigger;
+    capacity = capacity*2;
   }
 
-// from ASSIGNMENT 15
+//
+//
+// assignment 15 methods
 
-//CLEARS LIST
+// 15. clear method
   public void clear(){
     size=0;
     for (int i=0; i<size; i++){
@@ -75,23 +74,26 @@ public class SuperArray{
     }
   }
 
-//RETURNS TRUE IF LIST IS EMPTY
+// 15. check if empty method
   public boolean isEmpty(){
     return size==0;
   }
 
 
-//TO STRING
+// 15. to string method
   public String toString(){
     String string = "[";
-    for (int i=0; i<size-2; i++){
+    for (int i=0; i<size-1; i++){
       string+=data[i]+", ";
     }
-    string+=data[size-1]+"]";
+    if (size!=0){
+      string+=data[size-1];
+    }
+    string+="]";
     return string;
   }
 
-//RETURNS TRUE IF LIST CONTAINS GIVEN ELEMENT
+// 15. contains method: check if the superarray contains a given element
   public boolean contains(String s){
     for (int i=0; i < size; i++){
       if (data[i].equals(s)){
@@ -101,47 +103,30 @@ public class SuperArray{
     return false;
   }
 
-//INSERTS ELEMENT AT SPECIFIED POS; SHIFTS EVERYTHING RIGHT IF NEEDED
+// 15. inserts element, shifts right if needed
   public void add(int index, String element){
-    if (index+1>=data.length){
-      //Problem: program  might crash if the size is still > than the resize
-      //how to fix?
-      //while loop that repeats until size is < length of array
-      while (index>=data.length){
-        resize();
-      }
+    if (size>=capacity){
+      resize();
     }
-
-    if (index<data.length){
-      //if shift not necessary
-      if (data[index]==null){
-        data[index]=element;
-      }
-      //shift
-      for (int i=(data.length-1); i>=index && i<(data.length-index); i=i-1){
-        data[i]=data[i-1];
-        if (i==index){
-          data[i]=element; //add element after shift is complete
-        }
-      }
-      size++; //increase size
-    }else{
-      //this shouldn't happen
-      System.out.println(";-;");
+    for (int i=(capacity-1); i>=index; i--){
+      data[i]=data[i-1];
     }
+    data[index]=element; //add element after shift is complete
+    size++; //increase size
   }
 
-//REMOVES ELEMENT AT SPECIFIED POS; SHIFTS EVERYTHING LEFT IF NEEDED
+// 15. removes element, shifts left
   public String remove(int index){
     String elementRemoved=data[index];
-    for (int i=index; i<(data.length); i++){
+    for (int i=index; i<capacity-1; i++){
         data[i]=data[i+1]; //shift left (no need for removal, shifting removes it automatically)
     }
+    data[capacity-1]=null;
     size=size-1; //decrease size
     return elementRemoved;
   }
 
-//RETURNS INDEX OF FIRST OCCURRENCE OF ELEMENT OR -1 IF IT'S NOT THERE
+// 15. returns index of first time an element shows up
   public int indexOf(String s){
     for (int i=0; i<size; i++){
       if (data[i].equals(s)){
@@ -158,13 +143,11 @@ public class SuperArray{
   (In other words, this method must allocate a new array).
 */
 
-//not fully sure about this one (regarding memory things)
+// not fully sure about this one (regarding memory things)
   public String[] toArray(){
-    String[] safe = new String[data.length];
-    String placeholder="";
-    for (int i=0; i<data.length; i++){
-      placeholder=data[i];
-      safe[i]=placeholder;
+    String[] safe = new String[size];
+    for (int i=0; i<size; i++){
+      safe[i]=data[i];
     }
     return safe;
   }
