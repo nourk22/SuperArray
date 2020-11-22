@@ -63,12 +63,22 @@ public class SuperArray{
 
 // 14. (g) resize method
   private void resize(){
-    String[] bigger = new String[capacity*2];
-    for (int i=0; i<size; i++){
-      bigger[i]=data[i];
+    if (capacity==0){
+      String[] bigger = new String[10];
+      for (int i=0; i<size; i++){
+        bigger[i]=data[i];
+      }
+      capacity = 10;
+      data = bigger;
+    }else{
+      String[] bigger = new String[capacity*2];
+      for (int i=0; i<size; i++){
+        bigger[i]=data[i];
+      }
+      data = bigger;
+      capacity = capacity*2;
     }
-    data = bigger;
-    capacity = capacity*2;
+
   }
 
 //
@@ -117,12 +127,13 @@ public class SuperArray{
     if (index<0 || index > size()){
       throw new IndexOutOfBoundsException ("Index " + index + " cannot be out of range. Sigh.");
     }
-    if (size>=capacity){
+    if (size>=capacity || capacity == 0 || capacity == 1){
       resize();
     }
-    for (int i=(capacity-1); i>=index; i--){
+    for (int i=(size); i>index; i--){
       data[i]=data[i-1];
     }
+    data[index+1]=data[index];
     data[index]=element; //add element after shift is complete
     size++; //increase size
   }
